@@ -1,16 +1,15 @@
 package br.senai.sc.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; //data jpa
 import lombok.Getter;
 import lombok.ToString;
 
-//@Getter
+@Getter
 @ToString
 
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
-    @Getter
     @Column(nullable = false)
     private String nome;
     @Column(unique = true)
@@ -18,7 +17,6 @@ public class Usuario {
     @ToString.Exclude
     @Column(name = "password")
     private String senha;
-    @ToString.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

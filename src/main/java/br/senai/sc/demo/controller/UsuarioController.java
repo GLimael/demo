@@ -1,20 +1,32 @@
 package br.senai.sc.demo.controller;
 
 import br.senai.sc.demo.model.Usuario;
+import br.senai.sc.demo.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
-//    @GetMapping
-//    public String endPointGet(
-////            @RequestParam String parametro
-//    ) {
-//        return "GET!";
-//    }
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    //    @Autowired
+    private UsuarioService usuarioService;
 
     @PostMapping()
-    public String ednPointPost(@RequestBody Usuario usuario) {
+    public String cadastroUsuario(@RequestBody Usuario usuario) {
+        usuario = usuarioService.cadastroUsuario(usuario);
         return "Olá " + usuario.getNome() + ".\n" + usuario;
+    }
+
+    @GetMapping("/{id}")
+    public Usuario buscarUsuario(
+            @PathVariable Integer id
+    ) {
+        return usuarioService.buscarUsuario(id);
     }
 
 //    @PutMapping("/{id}")
